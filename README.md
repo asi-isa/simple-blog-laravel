@@ -3,7 +3,6 @@ People can write blog posts about any topic they want and other people can comme
 It has a lightweight CMS just to write and manage blog entries
 
 
-
 2. What data exists in this system?
 3. How does that data relate?
 4. Then → models, migrations, controllers
@@ -47,3 +46,11 @@ Laravel makes it easy to:
 add columns
 refactor relationships
 write new migrations
+
+
+design
+
+https://www.geldfuerdiewelt.de/
+https://www.geldfuerdiewelt.de/p/pendler-entlasten-aber-nicht-so-pendlerpauschale-tankrabatt
+https://www.bpb.de/themen/rechtsextremismus/dossier-rechtsextremismus/576903/rechtsextremer-geschichtsrevisionismus/
+https://www.fahrrad.de/collections/e-bikes-city

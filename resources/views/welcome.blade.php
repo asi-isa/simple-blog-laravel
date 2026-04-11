@@ -1,5 +1,13 @@
 <x-layout>
-    <h1 class="text-3xl font-bold underline">
-        Hello world!
-    </h1>
+    <ul>
+      @forelse ($posts as $post)
+         <li>
+            <a href="#">{{ $post->title }}</a>
+         </li>
+      @empty
+         <li>
+            <p>No posts.</p>
+         </li>
+      @endforelse
+    </ul>
 </x-layout>
