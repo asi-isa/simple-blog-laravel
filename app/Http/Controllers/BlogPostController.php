@@ -20,17 +20,33 @@ class BlogPostController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): void
+    public function create()
     {
-        //
+        return view('blog-post.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): void
+    public function store(Request $request)
     {
-        //
+        // validate
+        $request->validate([
+            'title' => ['required', 'string', 'min:4'],
+            'description' => ['required', 'string', 'min:4'],
+            'body' => ['required', 'string', 'min:4'],
+        ]);
+
+        // get auth user
+
+        BlogPost::create([
+            'user_id' => 1,
+            'title' => $request->title,
+            'description' => $request->description,
+            'body' => $request->body,
+        ]);
+
+        return redirect('/');
     }
 
     /**

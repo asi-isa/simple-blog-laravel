@@ -54,3 +54,8 @@ https://www.geldfuerdiewelt.de/
 https://www.geldfuerdiewelt.de/p/pendler-entlasten-aber-nicht-so-pendlerpauschale-tankrabatt
 https://www.bpb.de/themen/rechtsextremismus/dossier-rechtsextremismus/576903/rechtsextremer-geschichtsrevisionismus/
 https://www.fahrrad.de/collections/e-bikes-city
+
+
+# TODO
+
+1. BLOG POST CRUD

@@ -13,7 +13,7 @@
     @endif
 </head>
 
-<body class="bg-black text-white">
+<body class="bg-white text-black">
 
     <x-layout.nav />
     

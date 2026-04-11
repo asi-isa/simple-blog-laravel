@@ -12,4 +12,6 @@ class BlogPost extends Model
 {
     /** @use HasFactory<BlogPostFactory> */
     use HasFactory;
+
+    protected $guarded = [];
 }
