@@ -1,8 +1,8 @@
-@props(['label', 'name', 'type' => 'text'])
+@props(['label', 'name', 'value' => ''])
 
 <div class="flex flex-col">
     <label for="{{ $name }}">{{ $label }}</label>
-    <input type="{{ $type }}" name="{{ $name }}" class="border" {{ $attributes(['value' => old($name)]) }}>
+    <textarea name="{{ $name }}" rows="3" class="border">{{ old($name) ?? $value }}</textarea>
 
     <div>
         @error($name)

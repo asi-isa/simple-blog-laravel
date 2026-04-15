@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlogPostController extends Controller
 {
@@ -14,7 +15,9 @@ class BlogPostController extends Controller
      */
     public function index()
     {
-        return view('welcome', ['posts' => BlogPost::all()]);
+        $userPosts = Auth::user()->blogPosts()->get();
+
+        return view('blog-post.index', ['posts' => $userPosts]);
     }
 
     /**
@@ -30,21 +33,13 @@ class BlogPostController extends Controller
      */
     public function store(Request $request)
     {
-        // validate
-        $request->validate([
+        $validated = $request->validate([
             'title' => ['required', 'string', 'min:4'],
             'description' => ['required', 'string', 'min:4'],
             'body' => ['required', 'string', 'min:4'],
         ]);
 
-        // get auth user
-
-        BlogPost::create([
-            'user_id' => 1,
-            'title' => $request->title,
-            'description' => $request->description,
-            'body' => $request->body,
-        ]);
+        Auth::user()->blogPosts()->create($validated);
 
         return redirect('/');
     }
@@ -52,32 +47,51 @@ class BlogPostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(BlogPost $blogPost): void
+    public function show(BlogPost $blogPost)
     {
-        //
+        return view('blog-post.show', ['blogPost' => $blogPost]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(BlogPost $blogPost): void
+    public function edit(BlogPost $blogPost)
     {
-        //
+        if (Auth::user()->id !== $blogPost->user->id) {
+            return abort(403);
+        }
+
+        return view('blog-post.edit', ['blogPost' => $blogPost]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, BlogPost $blogPost): void
+    public function update(Request $request, BlogPost $blogPost)
     {
-        //
+        if (Auth::user()->id !== $blogPost->user->id) {
+            return abort(403);
+        }
+
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'min:4'],
+            'description' => ['required', 'string', 'min:4'],
+            'body' => ['required', 'string', 'min:4'],
+        ]);
+
+        $blogPost->update($validated);
+
+        return redirect()->route('blogPost.show', [$blogPost]);
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BlogPost $blogPost): void
+    public function destroy(BlogPost $blogPost)
     {
-        //
+        $blogPost->delete();
+
+        return redirect('/');
     }
 }
