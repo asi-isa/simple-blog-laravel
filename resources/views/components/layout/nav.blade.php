@@ -7,7 +7,17 @@
 
         <ul class="flex items-center gap-4">
             <li><a href="/subscribe">Subscribe</a></li>
-            <li><a href="/signin">Sign in</a></li>
+            @guest
+                <li><a href="/login">Log in</a></li>
+            @endguest
+
+            @auth
+                <form action="/logout" method="post">
+                    @csrf
+
+                    <button type="submit">Log out</button>
+                </form>
+            @endauth
         </ul>
     </div>
 
